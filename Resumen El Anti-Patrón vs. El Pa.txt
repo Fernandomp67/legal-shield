@@ -1,0 +1,21 @@
+## Resumen: El Anti-Patrón vs. El Patrón correcto
+
+|             ❌ Anti-patrón                            |               ✅ Patrón correcto |
+|--------------------------------------------------------|--------------------------------------------------|
+| LLM genera texto legal libre                           | Templates pre-redactados por humano              |
+| 700 líneas de "no alucines"                            | Motor determinístico, no LLM                     |
+| System prompt como guardrail                           | Inputs controlados (enums, dropdowns)            |
+| Un solo disclaimer | Disclaimer en API + UI + términos |
+| LLM decide qué cláusulas incluir                       | Condiciones booleanas (if sensibleData → DOC_03) |
+
+---
+
+## Conclusión
+
+La solución más robusta al problema de alucinaciones en contenido legal **es no usar LLM para el contenido legal**. El LLM puede estar en otros lugares del producto (búsqueda, resumen, onboarding), pero los documentos que tienen peso legal deben venir de templates validados por abogados, con el LLM haciendo sustitución de variables en el mejor caso.
+
+Los 700 líneas de system prompt pueden ayudar en el margen, pero no son una garantía. La arquitectura determinística sí lo es.
+
+---
+
+*Espero que esto aclare el approach. Happy to go deeper en cualquiera de las capas.*

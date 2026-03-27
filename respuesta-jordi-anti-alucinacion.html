@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respuesta a Jordi - Anti-Alucinación Legal</title>
+    <style>
+        :root {
+            --primary: #0a84ff;
+            --bg: #0f172a;
+            --text: #e2e8f0;
+            --accent: #ffd700;
+            --card-bg: #1e293b;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: var(--primary);
+            border-bottom: 1px solid #334155;
+            padding-bottom: 10px;
+        }
+        blockquote {
+            background: var(--card-bg);
+            border-left: 4px solid var(--accent);
+            padding: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            border-radius: 4px;
+        }
+        code {
+            background: #000;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background: #000;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+        pre code {
+            background: transparent;
+            padding: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #334155;
+        }
+        th {
+            background: #334155;
+            color: var(--accent);
+        }
+        .container {
+            background: #111827;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .badge-fail { background: #ef4444; color: white; }
+        .badge-success { background: #10b981; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Respuesta a Jordi: Blindaje Legal Anti-Alucinación</h1>
+        <blockquote>
+            <strong>Contexto:</strong> Jordi pregunta cómo evitar que un módulo de documentación legal genere contenido alucinado, dado que tiene un system prompt de 700+ líneas con guardrails.
+        </blockquote>
+
+        <hr>
+
+        <h2>La respuesta corta</h2>
+        <p><strong>No usamos LLM para generar el contenido legal.</strong></p>
+        <p>Eso es el principio #1. Cualquier sistema que le pida a un LLM que "redacte una cláusula de responsabilidad" va a alucinar tarde o temprano. Nuestra solución fue eliminar ese vector de raíz.</p>
+
+        <h2>Arquitectura: Determinístico vs. Generativo</h2>
+        <pre><code>❌ Lo que NO hacemos:
+Usuario → LLM → "Redacta un contrato SaaS conforme a LFPDPPP" → Documento
+
+✅ Lo que SÍ hacemos:
+Usuario → Formulario estructurado → Motor de reglas → Plantillas predefinidas → Documento</code></pre>
+
+        <p>El módulo de Docs Legal tiene <strong>15 documentos completos y ejecutables</strong> escritos y validados una sola vez. El "AI" del sistema es un motor de reglas determinístico.</p>
+
+        <h3>1. Inputs controlados</h3>
+        <p>El usuario selecciona de dropdowns, evitando texto libre en campos críticos:</p>
+        <pre><code>industry: 'Salud' | 'Fintech' | 'Legal' | 'Educación' | 'E-commerce' | 'Otro'
+criticality: 'Bajo' | 'Medio' | 'Alto'
+jurisdiction: 'México' | 'USA' | 'España' | 'Colombia'</code></pre>
+
+        <h3>2. Motor de riesgo determinístico</h3>
+        <pre><code>export function analyzeLegalRisk(input: AssessmentInput): LegalOutput {
+  let riskScore = 10;
+  if (industryLower.includes('salud')) {
+    riskScore += 30;
+    obligations.push('NOM-024-SSA3');
+  }
+}</code></pre>
+
+        <h3>3. Plantillas Atómicas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Doc</th>
+                    <th>Documento</th>
+                    <th>Condición</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>DOC_01</td>
+                    <td>Contrato Maestro MSSA</td>
+                    <td>Siempre</td>
+                </tr>
+                <tr>
+                    <td>DOC_02</td>
+                    <td>Aviso de Privacidad</td>
+                    <td>Si <code>personalData = true</code></td>
+                </tr>
+                <tr>
+                    <td>DOC_05</td>
+                    <td>Anexo SLA</td>
+                    <td>Si <code>hasSLA = true</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Resumen: El Patrón Correcto</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>❌ Anti-patrón</th>
+                    <th>✅ Patrón correcto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>LLM genera texto legal libre</td>
+                    <td>Templates pre-redactados por humano</td>
+                </tr>
+                <tr>
+                    <td>700 líneas de "no alucines"</td>
+                    <td>Motor determinístico (TS)</td>
+                </tr>
+                <tr>
+                    <td>System prompt como único guardrail</td>
+                    <td>Inputs controlados (dropdowns)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><em>Este documento resume el enfoque de la SaaS Factory para la automatización legal segura.</em></p>
+    </div>
+</body>
+</html>
