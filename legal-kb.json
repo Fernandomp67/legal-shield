@@ -37,6 +37,43 @@
       "ui_requirement": "Componente ConsentBanner con: checkbox NO pre-marcado, botón 'Aceptar y continuar' primario, botón 'Configurar preferencias' secundario, link aviso integral, icono 🔒 + texto 'Tus datos están protegidos'"
     }
   ],
+  "eu_sources": [
+    {
+      "id": "rgpd_2016_original",
+      "file": "2016-04-27_RGPD_Original.pdf",
+      "version_date": "2016-04-27",
+      "priority": 1,
+      "status": "active",
+      "description": "Texto original del Reglamento (UE) 2016/679"
+    },
+    {
+      "id": "rgpd_corrigendum_2018",
+      "file": "2018-05-23_RGPD_Corrigendum_02.pdf",
+      "version_date": "2018-05-23",
+      "priority": 2,
+      "status": "active",
+      "overrides": ["rgpd_2016_original"],
+      "description": "Corrección de errores del Reglamento (UE) 2016/679 (L 127/3)"
+    },
+    {
+      "id": "rgpd_consolidado_2021",
+      "file": "2021-03-04_RGPD_Consolidado.pdf",
+      "version_date": "2021-03-04",
+      "priority": 3,
+      "status": "active",
+      "overrides": ["rgpd_2016_original", "rgpd_corrigendum_2018"],
+      "description": "Versión consolidada que incluye correcciones hasta marzo 2021"
+    },
+    {
+      "id": "rgpd_corrigendum_2021",
+      "file": "2021-03-04_RGPD_Corrigendum_03.pdf",
+      "version_date": "2021-03-04",
+      "priority": 4,
+      "status": "active",
+      "overrides": ["rgpd_consolidado_2021"],
+      "description": "Corrección de errores adicional publicada en marzo 2021 (L 74/35)"
+    }
+  ],
   "risk_classification_rules": {
     "ALTO": ["industria=salud/fintech", "datos=sensibles/financieros/biométricos", "usuarios=>100k", "exporta_datos_masivos"],
     "MEDIO": ["industria=ecommerce/delivery/educacion", "datos=personales_basicos", "usuarios=1k-100k"],

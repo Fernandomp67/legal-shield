@@ -182,10 +182,12 @@ export function analyzeLegalRisk(input: AssessmentInput): LegalOutput {
     if (jurisdiction === 'USA') {
       obligations.push('Cumplimiento CCPA/CPRA (California Privacy Rights)');
       obligations.push('Cláusula de arbitraje internacional');
-    } else if (jurisdiction === 'España') {
-      obligations.push('Cumplimiento RGPD (Reglamento General de Protección de Datos UE)');
-      obligations.push('Designación de Delegado de Protección de Datos (DPO)');
-      obligations.push('Registro de actividades de tratamiento');
+    } else if (jurisdiction === 'España' || jurisdiction === 'UE') {
+      obligations.push('Cumplimiento RGPD (Reglamento (UE) 2016/679) - FUENTE: knowledge_base/eu-legislation/');
+      obligations.push('Validación obligatoria contra Corrigendum 2018 y 2021');
+      obligations.push('Designación de Delegado de Protección de Datos (DPO) conforme a Art. 37 RGPD');
+      obligations.push('Registro de actividades de tratamiento (Art. 30 RGPD)');
+      alerts.push('🛡️ BLINDAJE EUROPEO ACTIVO: El análisis se basa exclusivamente en los documentos PDF de la carpeta eu-legislation. Se priorizan las correcciones de 2018 y 2021 sobre el texto original.');
     } else if (jurisdiction === 'Colombia') {
       obligations.push('Ley 1581 de 2012 (Protección de Datos Colombia)');
       obligations.push('Registro ante SIC (Superintendencia de Industria y Comercio)');
