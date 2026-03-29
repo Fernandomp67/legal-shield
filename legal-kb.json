@@ -74,6 +74,40 @@
       "description": "Corrección de errores adicional publicada en marzo 2021 (L 74/35)"
     }
   ],
+  "es_sources": [
+    {
+      "id": "es_lssi_ce_2002",
+      "file": "2002-07-11_ES_LSSI_CE_Consolidada.pdf",
+      "version_date": "2002-07-11",
+      "priority": 1,
+      "status": "active",
+      "description": "Ley 34/2002 de servicios de la sociedad de la información y comercio electrónico"
+    },
+    {
+      "id": "es_lopdgdd_2018",
+      "file": "2018-12-05_ES_LOPDGDD_Consolidada.pdf",
+      "version_date": "2018-12-05",
+      "priority": 2,
+      "status": "active",
+      "description": "Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales"
+    },
+    {
+      "id": "es_lo_7_2021",
+      "file": "2021-05-26_ES_LO_7_2021_Consolidada.pdf",
+      "version_date": "2021-05-26",
+      "priority": 3,
+      "status": "active",
+      "description": "Ley Orgánica 7/2021 de protección de datos en el ámbito penal"
+    },
+    {
+      "id": "es_estatuto_aepd_2021",
+      "file": "2021-06-01_ES_Estatuto_AEPD_Consolidado.pdf",
+      "version_date": "2021-06-01",
+      "priority": 4,
+      "status": "active",
+      "description": "Estatuto de la Agencia Española de Protección de Datos"
+    }
+  ],
   "risk_classification_rules": {
     "ALTO": ["industria=salud/fintech", "datos=sensibles/financieros/biométricos", "usuarios=>100k", "exporta_datos_masivos"],
     "MEDIO": ["industria=ecommerce/delivery/educacion", "datos=personales_basicos", "usuarios=1k-100k"],
